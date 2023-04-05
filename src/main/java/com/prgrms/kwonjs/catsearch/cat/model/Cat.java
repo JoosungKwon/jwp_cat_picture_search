@@ -3,7 +3,8 @@ package com.prgrms.kwonjs.catsearch.cat.model;
 import static jakarta.persistence.GenerationType.*;
 import static lombok.AccessLevel.*;
 
-import org.hibernate.annotations.SQLInsert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 import com.prgrms.kwonjs.catsearch.cat.model.vo.Breed;
 
