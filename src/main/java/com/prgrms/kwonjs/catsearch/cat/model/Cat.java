@@ -2,8 +2,8 @@ package com.prgrms.kwonjs.catsearch.cat.model;
 
 import static lombok.AccessLevel.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 import lombok.Builder;
 import lombok.Getter;
