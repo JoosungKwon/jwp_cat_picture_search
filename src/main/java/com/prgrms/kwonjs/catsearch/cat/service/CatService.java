@@ -1,34 +1,27 @@
 package com.prgrms.kwonjs.catsearch.cat.service;
 
-import java.net.URI;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.prgrms.kwonjs.catsearch.cat.dto.CatApiData;
 import com.prgrms.kwonjs.catsearch.cat.dto.CatResponse;
 import com.prgrms.kwonjs.catsearch.cat.dto.CatSimpleResponse;
-import com.prgrms.kwonjs.catsearch.cat.model.Cat;
+import com.prgrms.kwonjs.catsearch.cat.exception.CatNotFound;
 import com.prgrms.kwonjs.catsearch.cat.repository.CatRepository;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class CatService {
 
-	public static final String CAT_NOT_FOUND = "해당하는 고양이가 없습니다.";
-
-	private final CatApiClient catClient;
 	private final CatRepository catRepository;
 
-	private String REQUEST_URI = "https://api.thecatapi.com/v1/images/search/";
-	private String API_KEY = "live_mNhy71rfbMXZsW5pYW0c5eWHAZKeLqGIKyKaILKvmjno0H0bHVyaclVQfCKR6LHh";
-
+	/*
+    주어진 매개변수의 수(size) 만큼 랜덤한 고양이 정보(아이디, 품종명, 이미지)를 리스트로 반환
+    */
 	public List<CatSimpleResponse> getRandom(int size) {
 		return catRepository.findByRandom(size)
 			.stream()
@@ -36,25 +29,22 @@ public class CatService {
 			.toList();
 	}
 
-	public List<CatSimpleResponse> search(String breedId) {
+	/*
+    품종ID(breedId)에 해당하는 모든 고양이의 정보(아이디, 품종명, 이미지)를 리스트로 반환
+    */
+	public List<CatSimpleResponse> searchBy(String breedId) {
 		return catRepository.findByBreedId(breedId)
 			.stream()
 			.map(CatSimpleResponse::of)
 			.toList();
 	}
 
+	/*
+	고양이ID(catId)에 해당하는 고양이의 디테일 정보(아이디, 품종명, 이미지, 크기, 성향, 서식지, 등)을 반환
+	*/
 	public CatResponse getBy(String catId) {
-		Cat cat = catRepository.findById(catId)
-			.orElseThrow(() -> new IllegalArgumentException(CAT_NOT_FOUND));
-		return CatResponse.of(cat);
-	}
-
-	@Transactional
-	public void fillData() {
-		log.info("start fill data");
-		List<CatApiData> responses = catClient.get(URI.create(REQUEST_URI), API_KEY, 100);
-		List<Cat> cats = responses.stream().map(CatApiData::toEntity).toList();
-		catRepository.saveAll(cats);
-		log.info("finish fill data");
+		return catRepository.findByCatId(catId)
+			.map(CatResponse::of)
+			.orElseThrow(CatNotFound::new);
 	}
 }
