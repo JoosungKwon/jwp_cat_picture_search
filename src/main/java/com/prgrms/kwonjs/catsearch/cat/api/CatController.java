@@ -42,7 +42,7 @@ public class CatController {
 	public ResponseEntity<ApiResponse<List<CatSimpleResponse>>> search(
 		@RequestParam(name = "q") String breedId) {
 
-		List<CatSimpleResponse> response = catService.search(breedId);
+		List<CatSimpleResponse> response = catService.searchBy(breedId);
 
 		return ResponseEntity.ok()
 			.body(new ApiResponse<>(response));

@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.prgrms.kwonjs.catsearch.cat.dto.CatResponse;
 import com.prgrms.kwonjs.catsearch.cat.dto.CatSimpleResponse;
-import com.prgrms.kwonjs.catsearch.cat.exception.CatNotFound;
+import com.prgrms.kwonjs.catsearch.cat.exception.CatNotFoundException;
 import com.prgrms.kwonjs.catsearch.cat.repository.CatRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -45,6 +45,6 @@ public class CatService {
 	public CatResponse getBy(String catId) {
 		return catRepository.findByCatId(catId)
 			.map(CatResponse::of)
-			.orElseThrow(CatNotFound::new);
+			.orElseThrow(CatNotFoundException::new);
 	}
 }
