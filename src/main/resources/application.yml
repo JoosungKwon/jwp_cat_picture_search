@@ -12,12 +12,18 @@ spring:
     database: mysql
     generate-ddl: true
     open-in-view: false
-    show-sql: true
+    show-sql: false
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
-        format_sql: true
+        format_sql: false
 
-api-key: ${API_KEY}
+logging:
+  level:
+    com.prgrms.kwonjs.catsearch: DEBUG
+
+cat-api:
+  key: ${CAT_API_KEY}
+  default-url: https://api.thecatapi.com
