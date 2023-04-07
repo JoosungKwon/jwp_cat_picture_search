@@ -59,7 +59,7 @@ public class DataLoadManager implements CommandLineRunner {
 
 			responses.stream()
 				.map(CatApiData::toEntity)
-				.forEach(catRepository::IgnoreInsert);
+				.forEach(catRepository::ignoreInsert);
 
 			dataSize -= responses.size();
 			log.info("filling data... : remain {} ", dataSize);
