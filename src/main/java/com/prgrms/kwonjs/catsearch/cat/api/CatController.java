@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.prgrms.kwonjs.catsearch.cat.dto.CatResponse;
-import com.prgrms.kwonjs.catsearch.cat.model.Cat;
+import com.prgrms.kwonjs.catsearch.cat.dto.CatSimpleResponse;
 import com.prgrms.kwonjs.catsearch.cat.service.CatService;
 import com.prgrms.kwonjs.catsearch.common.response.ApiResponse;
 
@@ -26,40 +26,34 @@ public class CatController {
 
 	private final CatService catService;
 
-	/**
-	 * 외부에서 문제를 추가하는 기능 (관리자 기능)
-	 */
+
 	@GetMapping(value = "/random50", produces = APPLICATION_JSON_VALUE)
-	public ResponseEntity<ApiResponse<List<CatResponse>>> getRandom50() {
+	public ResponseEntity<ApiResponse<List<CatSimpleResponse>>> getRandom50() {
 
-		List<CatResponse> response = catService.getRandom(50);
+		List<CatSimpleResponse> response = catService.getRandom(50);
 
 		return ResponseEntity.ok()
 			.body(new ApiResponse<>(response));
 	}
 
 
-	/**
-	 * 외부에서 문제를 추가하는 기능 (관리자 기능)
-	 */
+
 	@GetMapping(value = "/search", produces = APPLICATION_JSON_VALUE)
-	public ResponseEntity<ApiResponse<List<CatResponse>>> search(
-		@RequestParam(name = "q") String breeds) {
+	public ResponseEntity<ApiResponse<List<CatSimpleResponse>>> search(
+		@RequestParam(name = "q") String breedId) {
 
-		List<CatResponse> response = catService.search(breeds);
+		List<CatSimpleResponse> response = catService.search(breedId);
 
 		return ResponseEntity.ok()
 			.body(new ApiResponse<>(response));
 	}
 
-	/**
-	 * 외부에서 문제를 추가하는 기능 (관리자 기능)
-	 */
+
 	@GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
-	public ResponseEntity<ApiResponse<Cat>> getById(
+	public ResponseEntity<ApiResponse<CatResponse>> getById(
 		@PathVariable(name = "id") String catId) {
 
-		Cat response = catService.getBy(catId);
+		CatResponse response = catService.getBy(catId);
 
 		return ResponseEntity.ok()
 			.body(new ApiResponse<>(response));
