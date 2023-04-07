@@ -14,7 +14,7 @@ public record CatResponse (
 	public static CatResponse of(Cat cat) {
 		return new CatResponse(
 			cat.getCatId(),
-			cat.getName(),
+			cat.getBreedName(),
 			cat.getUrl(),
 			cat.getWidth(),
 			cat.getHeight(),

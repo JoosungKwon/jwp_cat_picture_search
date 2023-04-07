@@ -8,7 +8,7 @@ public record CatSimpleResponse(
 	String url
 ) {
 	public static CatSimpleResponse of(Cat cat) {
-		return new CatSimpleResponse(cat.getCatId(), cat.getName(), cat.getUrl());
+		return new CatSimpleResponse(cat.getCatId(), cat.getBreedName(), cat.getUrl());
 	}
 }
 

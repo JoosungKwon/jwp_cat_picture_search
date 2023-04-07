@@ -28,7 +28,7 @@ public class Cat {
 	@GeneratedValue(strategy = IDENTITY)
 	private Long id;
 
-	@Column(name = "cat_id", nullable = false)
+	@Column(nullable = false)
 	private String catId;
 
 	@Column(nullable = false, length = 500)
@@ -52,7 +52,14 @@ public class Cat {
 		this.breed = breed;
 	}
 
-	public String getName() {
+	public String getBreedId() {
+		if (this.breed == null) {
+			return null;
+		}
+		return this.breed.getId();
+	}
+
+	public String getBreedName() {
 		if (this.breed == null) {
 			return null;
 		}
