@@ -1,32 +1,34 @@
 package com.prgrms.kwonjs.catsearch.cat.service;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.prgrms.kwonjs.catsearch.cat.model.Cat;
+import com.prgrms.kwonjs.catsearch.cat.dto.CatApiData;
 
 @FeignClient(name = "CatClient", url = "URL")
-public interface CatClient {
+public interface CatApiClient {
 
 	@GetMapping
-	Cat get(
+	List<CatApiData> get(
 		URI requestUri,
-		@RequestHeader("x-api-key") String apiKey,
+		@RequestHeader(name = "x-api-key") String apiKey,
 		@RequestParam(name = "limit") Integer limit
 	);
 
 	@GetMapping
-	Cat search(
+	List<CatApiData> search(
 		URI requestUri,
-		@RequestHeader("x-api-key") String apiKey,
-		@RequestParam(name = "limit") String breedId
+		@RequestHeader(name = "x-api-key") String apiKey,
+		@RequestParam(name = "breedId") String breedId
 	);
 
-	Cat getById(
+	@GetMapping
+	CatApiData getById(
 		URI requestUri,
 		@RequestHeader("x-api-key") String apiKey
 	);
