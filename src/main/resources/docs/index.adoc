@@ -1,0 +1,71 @@
+= Cat Search Application API DOCS
+
+== Cat
+
+=== GetRandom50
+
+랜덤한 50개의 고양이 목록을 가져옵니다.
+
+==== Curl Request
+
+include::{snippets}/getRandom50/curl-request.adoc[]
+
+==== HTTP Request
+
+include::{snippets}/getRandom50/http-request.adoc[]
+
+==== HTTP Response
+
+include::{snippets}/getRandom50/http-response.adoc[]
+
+==== Response Fields
+
+include::{snippets}/getRandom50/response-fields.adoc[]
+
+=== SearchByBreedId
+
+품종으로 해당하는 고양이 목록을 검색합니다.
+
+==== Curl Request
+
+include::{snippets}/searchByBreedId/curl-request.adoc[]
+
+==== HTTP Request
+
+include::{snippets}/searchByBreedId/http-request.adoc[]
+
+==== Query Parameters
+
+include::{snippets}/searchByBreedId/query-parameters.adoc[]
+
+==== HTTP Response
+
+include::{snippets}/searchByBreedId/http-response.adoc[]
+
+==== Response Fields
+
+include::{snippets}/searchByBreedId/response-fields.adoc[]
+
+=== getByCatId
+
+고양이 고유 ID로 고양이 데이터를 가져옵니다.
+
+==== Curl Request
+
+include::{snippets}/getByCatId/curl-request.adoc[]
+
+==== HTTP request
+
+include::{snippets}/getByCatId/http-request.adoc[]
+
+==== Path Parameters
+
+include::{snippets}/getByCatId/path-parameters.adoc[]
+
+==== HTTP Response
+
+include::{snippets}/getByCatId/http-response.adoc[]
+
+==== Response Fields
+
+include::{snippets}/getByCatId/response-fields.adoc[]
