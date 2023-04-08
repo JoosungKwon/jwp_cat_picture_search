@@ -19,7 +19,7 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(RuntimeException.class)
 	public ErrorResponse handleException(HttpServletRequest request, RuntimeException e) {
 		log.warn("[RUNTIME_EXCEPTION] ", e);
-		log.warn("[REQUEST] {}", request);
+		log.warn("[REQUEST] {}", request.getRequestURI());
 		return ErrorResponse.runtimeException();
 	}
 
@@ -27,7 +27,7 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(Exception.class)
 	public ErrorResponse handleException(HttpServletRequest request, Exception e) {
 		log.error("[EXCEPTION] ", e);
-		log.error("[REQUEST] {}", request);
+		log.error("[REQUEST] {}", request.getRequestURI());
 		return ErrorResponse.exception();
 	}
 

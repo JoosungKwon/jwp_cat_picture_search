@@ -23,9 +23,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/cats")
 public class CatController {
 
-
 	private final CatService catService;
-
 
 	@GetMapping(value = "/random50", produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity<ApiResponse<List<CatSimpleResponse>>> getRandom50() {
@@ -36,10 +34,8 @@ public class CatController {
 			.body(new ApiResponse<>(response));
 	}
 
-
-
 	@GetMapping(value = "/search", produces = APPLICATION_JSON_VALUE)
-	public ResponseEntity<ApiResponse<List<CatSimpleResponse>>> search(
+	public ResponseEntity<ApiResponse<List<CatSimpleResponse>>> searchByBreedId(
 		@RequestParam(name = "q") String breedId) {
 
 		List<CatSimpleResponse> response = catService.searchBy(breedId);
@@ -48,9 +44,8 @@ public class CatController {
 			.body(new ApiResponse<>(response));
 	}
 
-
 	@GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
-	public ResponseEntity<ApiResponse<CatResponse>> getById(
+	public ResponseEntity<ApiResponse<CatResponse>> getByCatId(
 		@PathVariable(name = "id") String catId) {
 
 		CatResponse response = catService.getBy(catId);

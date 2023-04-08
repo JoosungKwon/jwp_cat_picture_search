@@ -1,16 +1,32 @@
 spring:
+  config:
+    import: optional:file:.env[.properties]
+
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:testdb;MODE=MySQL;
+    url: jdbc:h2:mem:app;MODE=MySQL;
     username: sa
     password:
 
   jpa:
     database: mysql
-    generate-ddl: true
+    generate-ddl: false
     open-in-view: false
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: none
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
+
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:sql/schema.sql
+
+logging:
+  level:
+    com.prgrms.kwonjs.catsearch: DEBUG
+
+cat-api:
+  key: ${CAT_API_KEY}
+  default-url: https://api.thecatapi.com

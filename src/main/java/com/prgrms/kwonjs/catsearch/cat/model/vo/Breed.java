@@ -4,6 +4,7 @@ import static lombok.AccessLevel.*;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -25,4 +26,12 @@ public class Breed {
 
 	@Column
 	private String origin;
+
+	@Builder
+	public Breed(String id, String name, String temperament, String origin) {
+		this.id = id;
+		this.name = name;
+		this.temperament = temperament;
+		this.origin = origin;
+	}
 }

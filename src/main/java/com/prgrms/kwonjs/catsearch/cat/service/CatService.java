@@ -40,7 +40,7 @@ public class CatService {
 	}
 
 	/*
-	고양이ID(catId)에 해당하는 고양이의 디테일 정보(아이디, 품종명, 이미지, 크기, 성향, 서식지, 등)을 반환
+	고양이ID(catId)에 해당하는 고양이의 디테일 정보(아이디, 품종명, 이미지, 이미지 크기, 성격, 출신지, 등)을 반환
 	*/
 	public CatResponse getBy(String catId) {
 		return catRepository.findByCatId(catId)

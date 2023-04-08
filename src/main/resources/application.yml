@@ -10,19 +10,20 @@ spring:
 
   jpa:
     database: mysql
-    generate-ddl: true
+    generate-ddl: false
     open-in-view: false
     show-sql: false
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
         format_sql: false
 
-logging:
-  level:
-    com.prgrms.kwonjs.catsearch: DEBUG
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:sql/schema.sql
 
 cat-api:
   key: ${CAT_API_KEY}

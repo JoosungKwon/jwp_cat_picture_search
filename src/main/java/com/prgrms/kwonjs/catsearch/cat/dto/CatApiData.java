@@ -6,6 +6,7 @@ import com.prgrms.kwonjs.catsearch.cat.model.Cat;
 import com.prgrms.kwonjs.catsearch.cat.model.vo.Breed;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -21,6 +22,7 @@ public class CatApiData {
 	private Integer height;
 	private List<Breed> breeds;
 
+	@Builder
 	public CatApiData(String id, String url, Integer width, Integer height, List<Breed> breeds) {
 		this.id = id;
 		this.url = url;
