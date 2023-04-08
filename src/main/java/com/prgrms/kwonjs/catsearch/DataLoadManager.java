@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 public class DataLoadManager implements CommandLineRunner {
 
 	private static final int DEFAULT_DATA_SIZE = 250;
-	private static final int REQUEST_DATA_SIZE = 100;
+	private static final int MAX_REQUEST_DATA_SIZE = 100;
 	private static final int TRUE = 1;
 
 	private final CatApiClient catClient;
@@ -54,14 +54,21 @@ public class DataLoadManager implements CommandLineRunner {
 
 		log.info("start fill data : need {}", dataSize);
 
-		while (dataSize > 0){ // 데이터를 100개씩 요청하여 채움
-			List<CatApiData> responses = catClient.get(REQUEST_DATA_SIZE, TRUE);
+		while (dataSize > 0) {
+			int requestDataSize = MAX_REQUEST_DATA_SIZE;
 
-			responses.stream()
+			if (dataSize < requestDataSize) { // 남은 데이터의 개수가 한번에 요청할 수 있는 데이터의 개수보다 작으면 남은 데이터의 개수만큼 요청
+				requestDataSize = dataSize;
+			}
+
+			List<CatApiData> responses = catClient.get(requestDataSize, TRUE);
+
+			int insertSize = responses.stream()
 				.map(CatApiData::toEntity)
-				.forEach(catRepository::ignoreInsert);
+				.mapToInt(catRepository::ignoreInsert)
+				.sum();
 
-			dataSize -= responses.size();
+			dataSize -= insertSize;
 			log.info("filling data... : remain {} ", dataSize);
 		}
 

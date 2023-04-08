@@ -28,5 +28,5 @@ public interface CatRepository extends JpaRepository<Cat, String> {
 		        + "VALUES "
 		            + "(:#{#cat.catId}, :#{#cat.url}, :#{#cat.width}, :#{#cat.height}, "
 		            + ":#{#cat.breedId}, :#{#cat.breedName}, :#{#cat.temperament}, :#{#cat.origin})")
-	void ignoreInsert(@Param(value = "cat") Cat cat);
+	int ignoreInsert(@Param(value = "cat") Cat cat);
 }
